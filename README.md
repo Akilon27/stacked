@@ -5,8 +5,8 @@ Package for stacks of cubes (simple or more complex) and dices (dice-face from e
 The update adds many functions for representing solids (polyhedra, cones, cylinders, spheres and the globe), their cross-sections by a plane (defined either by three points or by the four coefficients of its Cartesian equation), and their nets. 
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue)](LICENSE.txt)
-[![User Manual](https://img.shields.io/badge/manual-.pdf-teal)][french manual]
-[![User Manual](https://img.shields.io/badge/manual-.pdf-purple)][english manual]
+[![User Manual](https://img.shields.io/badge/manuel-fr.pdf-teal)][french manual]
+[![User Manual](https://img.shields.io/badge/manual-en.pdf-purple)][english manual]
 
 ## Installing
 
