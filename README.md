@@ -2,6 +2,8 @@
 
 Package for stacks of cubes (simple or more complex) and dices (dice-face from eric1102 on Discord, with his permission, 3d and throws). Inspired by the LaTeX packages tikz3d-fr and ProfCollege and using cetz:0.5.2 (and suiji). A few colormaps (most from lilaq) are also defined. Two functions help-en and help-fr may be used to get help about a function or a parameter (ex: #help-fr("throws") or #help-en("pile(side)")). The manuals and the help functions are made with help from tidy.
 
+The update adds many functions for representing solids (polyhedra, cones, cylinders, spheres and the globe), their cross-sections by a plane (defined either by three points or by the four coefficients of its Cartesian equation), and their nets. 
+
 [![MIT License](https://img.shields.io/badge/license-MIT-blue)](LICENSE.txt)
 [![User Manual](https://img.shields.io/badge/manual-.pdf-teal)][french manual]
 [![User Manual](https://img.shields.io/badge/manual-.pdf-purple)][english manual]
@@ -11,7 +13,7 @@ Package for stacks of cubes (simple or more complex) and dices (dice-face from e
 Install stacked by cloning it or importing like this:
 
 ```typ
-#import "@preview/stacked:0.1.0": cube
+#import "@preview/stacked:0.2.0": cube
 
 #canvas(z:(-.5,-.5),{
   import draw:*
@@ -36,7 +38,7 @@ The functions pile and building work differently.
   which gives :
   
   ```typ
-  #import "@preview/stacked:0.1.0": pile
+  #import "@preview/stacked:0.2.0": pile
   #pile((54321, 3112, 2112, 11111,purple),border-stroke: true,side: true,light:(15%,0%,40%))#h(1fr)
   #pile(54321, 3112, 2112, 11111,z-spread: 0,iso:true,below-separation: 5)#h(1fr)
   ```
@@ -48,7 +50,7 @@ The functions pile and building work differently.
 + For building, the arguments (or array) `(31670104,23312300,20111200),(11100000,2100000),30200000` corresponds correspond to a definition by "colors" in a color-list (1 for the first color, 2 for the second ... up to "g" for the sixteenth color and 0 to not draw a cube). The first array of integers or strings corresponds to the left-most slice (row by row bottom to top) ... So
 
   ```typ
-  #import "@preview/stacked:0.1.0": building
+  #import "@preview/stacked:0.2.0": building
   
   #building((31670104,23312300,20111200),(11100000,2100000),30200000,color-list: (aqua.mix(blue),red, green,yellow,blue,eastern, purple),border-stroke: true,)
   ```
@@ -62,7 +64,7 @@ The functions pile and building work differently.
 + With pile, you can have the front, right and above views at once (or a selection):
 
   ```typ
-  #import "@preview/stacked:0.1.0": pile
+  #import "@preview/stacked:0.2.0": pile
 
   #h(1fr)
   #pile(54321,3212,3212,11111,none,grids:true,solution: true,back-separation: 4,left-separation: 4,plan: true,iso:1,)
@@ -78,7 +80,7 @@ The functions pile and building work differently.
 + With building, you can have all 6 views but it's "necessary" to call the functions made for it:
 
    ```typ
-  #import "@preview/stacked:0.1.0": building, above-view, below-view, right-view, left-view, front-view, back-view
+  #import "@preview/stacked:0.2.0": building, above-view, below-view, right-view, left-view, front-view, back-view
 
   // An example with visibles holes and a construct and its 6 views:
   #let construct-param = (color-list: (aqua.mix(blue),red, green,yellow,blue,eastern, purple),border-stroke: true,)
@@ -108,7 +110,7 @@ The functions pile and building work differently.
 Random by default gives a (3 x 4 x 5) stack, but width, depth and height can be set and there are 4 random modes (n°2 by Claude and 3 calling suiji are recommended) :
 
 ```typ
-#import "@preview/stacked:0.1.0": pile
+#import "@preview/stacked:0.2.0": pile
 #pile(random-mode: 4, plan: true,)
 #pile(random: true, width: 4, depth: 3, height: 6, seed: 2,side: true,random-mode: 2,plan: true,) //2
 // 2. Mode aléatoire avec Plan de niveau
@@ -126,7 +128,7 @@ Random by default gives a (3 x 4 x 5) stack, but width, depth and height can be 
 ## Dices
 
 ```typ
-#import "@preview/stacked:0.1.0": dice
+#import "@preview/stacked:0.2.0": dice
 
 A simple die (front=1, top=2) and a red one with white dots viewed from the left:
 
@@ -141,7 +143,7 @@ A simple die (front=1, top=2) and a red one with white dots viewed from the left
 </div>
 
 ```typ
-#import "@preview/stacked:0.1.0": throws
+#import "@preview/stacked:0.2.0": throws
 
 // Lancer classique (aligné horizontalement) de 5 dés aléatoires :
 Classic throw of 5 random dices :
@@ -185,7 +187,7 @@ Yams mode throw of 5 dices with a list of colors :
 </div>
 
 ```typ
-#import "@preview/stacked:0.1.0": dice-face
+#import "@preview/stacked:0.2.0": dice-face
 
 #for n in range(1, 7) { dice-face(n) + h(2pt) } #h(1fr)
 #for n in range(1, 7) { dice-face(n, fill: black) + h(2pt) } #h(1fr)
@@ -199,6 +201,72 @@ $#dice-face(3) + #dice-face(2) = #dice-face(5)$ #h(1fr)
 
 <div align="center">
   <img alt="exemples de dés en 2d" src="Exemples/dice-face.svg" style="max-width: 100%; padding: 10px 10px; box-shadow: 1pt 1pt 10pt 0pt #AAAAAA; border-radius: 4pt; box-sizing: border-box; background: white">
+</div>
+
+## Sections of solids
+
+```typ
+#import "@preview/stacked:0.2.0": polysection, cylsection, doubleconesection, spheresection, regpolyhedron
+
+#grid(columns: 4, gutter: 8mm, align: center+horizon,
+polysection(0.3, 1, 0.2, 0, vertices: regpolyhedron("dodécaèdre", side: 1.5)),
+cylsection((0,0.5,0.5),(1,0.3,-0.2),(-0.6,1.4,0.1), plane-names: ("A","B","C"), height: 2.5),
+doubleconesection(1,0,0,-0.4, show-radius: true, show-centers: true, show-apex: true, point-labels: (s: $S$, c1: move($O'$,dx:-1em))),
+spheresection(0,1,0,-0.5, center: (0,1,0), show-radius: true, show-centers: true, point-labels: (o: $O$, sc: $I$), radius: 2, radius-label: $2$,)
+)
+```
+
+<div align="center">
+  <img alt="sections examples" src="Exemples/sections.svg" style="max-width: 100%; padding: 10px 10px; box-shadow: 1pt 1pt 10pt 0pt #AAAAAA; border-radius: 4pt; box-sizing: border-box; background: white">
+</div>
+
+## Globe
+
+```typ
+#import "@preview/stacked:0.2.0": globe, globe-view
+
+#grid(columns: 3, gutter: 8mm, align: center+horizon,
+globe(..globe-view(lon: 30, lat: 25), radius: 2.6, show-axis: true, show-tropics: true, graticule: 30, points: ("Paris", "Le Caire", "Dakar"), point-labels: (n: $N$)),
+globe(..globe-view(lon: 60, lat: 20), radius: 2.6, show-axis: true,
+      points: (("city": "Tokyo", angles: true),), point-labels: (o: $O$, g: $G$), show-centers: true),
+globe(..globe-view(lon: -30, lat: 15), radius: 2.6, 0,1,0,-1.7, graticule: 30,
+      points: (("city": "New York", angles:true), "Rio de Janeiro"), lat-label: $40.7$, lon-label: $-74$)
+)
+```
+
+<div align="center">
+  <img alt="globe examples" src="Exemples/globe.svg" style="max-width: 100%; padding: 10px 10px; box-shadow: 1pt 1pt 10pt 0pt #AAAAAA; border-radius: 4pt; box-sizing: border-box; background: white">
+</div>
+
+## Nets and unfolding
+
+```typ
+#import "@preview/stacked:0.2.0": *
+
+#cylunfold(steps: (0, 0.4, 1), labels: ($t:0$, $t:0.4$, $t:1$), gap: 1.5, cote-labels: auto, cotes: true)
+
+#polyunfold(vertices: ((-1,-1,-0.6),(1,-1,-0.6),(0,-1,1.1),(-1,1,-0.6),(1,1,-0.6),(0,1,1.1)), steps: (0, .12, 0.5, 1), length: .8cm,root: 1, gap: 2)
+
+#grid(columns: 3, gutter: 16mm, align: horizon,
+  polyunfold(vertices: regpolyhedron("icosaèdre", radius: 2), t: 0, length: 0.45cm),
+  polyunfold(vertices: regpolyhedron("icosaèdre", radius: 2), view: "top", length: 0.45cm),
+)
+
+#stack(dir: ltr, spacing: 20mm,
+  polyunfold(steps: (0, 0.5, 1), labels: ($t:0$, $t:0.5$, $t:1$), palette: (red.lighten(60%), green.lighten(60%), blue.lighten(60%), yellow.lighten(60%), orange.lighten(60%), purple.lighten(60%)), length: 0.5cm, gap: 2),
+  polyunfold(view: "top", labels: ([view:"top"],), palette: (red.lighten(60%), green.lighten(60%), blue.lighten(60%), yellow.lighten(60%), orange.lighten(60%), purple.lighten(60%)), length: 0.5cm)
+)
+
+#grid(columns: 4, column-gutter: 1mm, align: horizon,
+  cylunfold(radius: 1.5, height: 2.5, t: 0, cotes: true, cote-labels: (r: auto, h: $H$), length: 0.5cm),
+  cylunfold(radius: 1.5, height: 2.5, view: "top", cotes: true, cote-labels: auto, cote-unit: "cm", length: 0.5cm, ),
+  coneunfold(radius: 3, height: 4, t:0, cotes: true, cote-labels: auto, cote-unit: "cm", length: 0.5cm,),
+  coneunfold(radius: 3, height: 4, view: "top", cotes: true, cote-labels: auto, cote-unit: "cm", length: 0.5cm,),
+)
+```
+
+<div align="center">
+  <img alt="Nets unfolding examples" src="Exemples/nets.svg" style="max-width: 100%; padding: 10px 10px; box-shadow: 1pt 1pt 10pt 0pt #AAAAAA; border-radius: 4pt; box-sizing: border-box; background: white">
 </div>
 
 More on these functions in the [french manual](Exemples/stacked-fr.pdf) or the [english manual](Exemples/stacked-en.pdf).

@@ -1,5 +1,6 @@
-#import "@local/stacked:0.1.0":*
+#import "@local/stacked:0.2.0":*
 #set page(width:14cm, height: auto, margin:10pt)
+// #import "../Non/cetz-geo.typ": *
 
 // set-transform((
 //     (      calc.cos(ph)  * x-scale,      calc.sin(ph) * x-scale,  0,0),
@@ -15,15 +16,13 @@
 //     (0,0,0,1)
 //   ))
 
-
-
-#canvas({
+#canvas({//x:35.264deg,y:45deg
   import draw:*  
   dice(standalone: false, origin: (0,2),front: 2,top:3,s:.8,vue: "D")
   repere
 })
 
-#dice(front: 2, top: 3, theta: 75,phi: 105, s: 1,opacity:60%,color: eastern,) 
+#dice(front: 2, top: 3, theta: 60,phi: 110, s: 1,opacity:60%,color: eastern,) 
 
 = Dé seul
 A simple die (front=1, top=2) and a red one with white dots viewed from the left:

@@ -240,13 +240,13 @@
 /// Fonction qui détermine les définitions pour cetz.canvas de `x`, `y` et `z` pour un angle de vue défini par l'élévation (θ) et l'azimut (φ).
 /// Il faut la passer directement au canvas, sans oublier les deux points
 ///
-/// #example(`#canvas(..thetaphi(theta:60, phi:150), {
+/// #example(`#canvas(..maincoords(theta:60, phi:150), {
 ///   import draw:*  
 ///   repere
 /// })`)
 ///
 ///  -> dictionary
-#let thetaphi(
+#let maincoords(
   /// Elévation θ -> int | angle
   theta:70,
   /// Azimut φ -> int | angle

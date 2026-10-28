@@ -37,18 +37,20 @@ random part of the `pile` function; the rest is my own work, except for the
 `dice-face` function, which was created by eric1102 (on Discord) and is
 included here with his permission.
 
-= Functions: cube stacks and dice
+Version 2 adds many functions for representing solids (polyhedra, cones, cylinders, and spheres), their cross-sections by a plane (defined either by three points or by the four coefficients of its Cartesian equation), and their nets. Helper functions are provided to automatically compute vertex coordinates for some common cases (pyramids, prisms, and several regular polyhedra: tetrahedron, cube, octahedron, dodecahedron, and icosahedron). In addition, the globe function can be used to explain geographical and spherical coordinates.
+
+= v1 functions: cube stacks and dice
 
 #import "premanual-en.typ"
-#import "../PileCubes.typ"
-#import "../Dés3D.typ"
+#import "/PileCubes.typ"
+#import "/Dés3D.typ"
 
 // #show heading.where(level:2): it => {pagebreak(); it}
 
 #let docs = tidy.parse-module(
   read("premanual-en.typ") + read("/PileCubes.typ") + read("/Dés3D.typ"),
   // name:"OpsM",
-  scope: (PileCubes: PileCubes, Dés3D:Dés3D), 
+  scope: (PileCubes: PileCubes, Dés3D:Dés3D,), 
   preamble: "#import PileCubes: *\n #import Dés3D: *\n ",
 )
 
@@ -69,5 +71,22 @@ included here with his permission.
     ),
   )
 }
+
+#tidy.show-module(docs, style: dictionary(tidy.styles.default) + (show-example: show-example),omit-private-definitions: true,sort-functions: none)
+
+#pagebreak()
+= v2 functions for 3D solids (and nets and cross-sections)
+
+#import "premanual2-en.typ"
+#import "/polysection.typ"
+#import "/solidsection.typ"
+#import "/solidunfold.typ"
+#import "/solidvertices.typ"
+
+#let docs = tidy.parse-module(
+  read("premanual2-en.typ") + read("/polysection.typ") + read("/solidsection.typ") + read("/solidunfold.typ") + read("/solidvertices.typ"),
+  scope: (PileCubes: PileCubes, Dés3D:Dés3D, polysection:polysection, solidsection:solidsection, solidunfold:solidunfold, solidvertices:solidvertices), 
+  preamble: "#import polysection: *\n #import solidsection: *\n #import solidunfold: *\n #import solidvertices: *\n ",
+)
 
 #tidy.show-module(docs, style: dictionary(tidy.styles.default) + (show-example: show-example),omit-private-definitions: true,sort-functions: none)

@@ -142,8 +142,8 @@
 /// Cubes are given as a list of lists: from front to back using a number/string
 /// such as `"5432a"`, then layer by layer `btt`, with lists ordered from left to right.
 /// 
-///```example
-///>>> #h(1.5cm)
+/// ```example
+/// >>> #h(1.5cm)
 /// #building((
 /// ("ttttt","ttttt","ttttt","ttttt"),
 /// // Leftmost slice, from bottom to top
@@ -153,15 +153,15 @@
 /// ("ttttt","ttttt","ttttt","totot")
 /// // Rightmost slice, same arrangement
 /// ), y-spread:1)
-///```
+/// ```
 ///
-///```example
-///>>> #h(0.5cm)
+/// ```example
+/// >>> #h(0.5cm)
 /// #building(((578,"21b",44), ("59a",63,64), (533,66,0),)) 
 /// #h(3em)
 /// #building(((578,"21b",44), ("59a",63,64), (533,66,0),),
 /// y-spread:1.5)
-///```
+/// ```
 ///
 /// `z:0` for front view, `y:0, z:(0,-1)` for top view,
 /// `x:0, z:(-1,0)` for right view -> content
@@ -269,12 +269,12 @@
 /// Function that sets the 3D viewing angle for a cetz.canvas using polar (θ) and azimuthal (φ) angles.
 /// You have to pass it directly to the canvas, without forgetting to spread.
 ///
-/// #example(`#canvas(..thetaphi(theta:60, phi:150), {
+/// #example(`#canvas(..maincoords(theta:60, phi:150), {
 ///   import draw:*  
 ///   repere
 /// })`)
 /// -> dictionary
-#let thetaphi(
+#let maincoords(
   /// Polar angle θ -> int | angle
   theta:70,
   /// Azimuthal angle φ -> int | angle

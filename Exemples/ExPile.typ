@@ -1,4 +1,4 @@
-#import "@local/stacked:0.1.0":*
+#import "@local/stacked:0.2.0":*
 #set page(width:14.5cm, height: auto, margin:10pt)
 
 // = Cube simple

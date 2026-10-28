@@ -11,7 +11,7 @@
 }
 
 // Fonction qui détermine les définitions pour cetz.canvas de `x`, `y` et `z` pour un angle de vue défini par l'élévation (θ) et l'azimut (φ). -> dictionary
-#let thetaphi(
+#let maincoords(//thetaphi
   // polar angle θ -> int | angle
   theta:70,
   // azimuthal angle φ -> int | angle
